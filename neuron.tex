@@ -1,0 +1,37 @@
+\documentclass{article}
+\usepackage[pdftex,active,tightpage]{preview}
+\setlength\PreviewBorder{2mm}
+
+\usepackage{amsmath}
+\usepackage{tikz}
+\usetikzlibrary{shapes, calc, shapes, arrows} 
+
+\begin{document}
+\begin{preview}
+\tikzstyle{inputNode}=[draw,circle,font=\scriptsize, fill=green!50,minimum size=13pt,inner sep=0pt]
+\tikzstyle{activationNode}=[draw,circle,fill=red!50,minimum size=20pt,inner sep=0pt]
+\tikzstyle{sumNode}=[draw,circle,minimum size=20pt,fill=blue!50,inner sep=0pt]
+\tikzstyle{outputNode}=[draw, circle, minimum size=20pt, fill=blue!80, inner sep=0pt]
+\tikzstyle{stateTransition}=[->, thick]
+\begin{tikzpicture}
+	\node[inputNode] (x0) at (-2.3, 1.8) {$x_0$};
+	\node[inputNode] (x1) at (-2.3, 0.9) {$x_1$};
+	\node[inputNode] (x2) at (-2.3, 0) {$x_2$};
+	\node[inputNode] (x3) at (-2.3, -0.9) {$x_3$};
+	\node[inputNode] (xn) at (-2.3, -1.8) {$x_n$};
+
+	\node[sumNode] (sum) at (0,0) {$\Sigma$};
+	\node[activationNode] (activate) at (1.5,0) {$\varphi$};
+	\node[outputNode] (output) at (3, 0) {y};
+	\draw[stateTransition] (x0) to[out=0,in=120] node [midway,font=\scriptsize, sloped, above=-2] {$\times w_0 + b_0$} (sum);
+	\draw[stateTransition] (x1) to[out=0,in=150] node [midway,font=\scriptsize, sloped, above=-2] {$\times w_1+b_1$} (sum);
+	\draw[stateTransition] (x2) to[out=0,in=180] node [midway,font=\scriptsize, sloped, above=-2] {$\times w_2+b_2$} (sum);
+	\draw[stateTransition] (x3) to[out=0,in=210] node [midway,font=\scriptsize, sloped, above=-2] {$\times w_3+b_3$} (sum);
+	\draw[stateTransition] (xn) to[out=0,in=240] node [midway,font=\scriptsize, sloped, above=-2] {$\times w_n+b_n$} (sum);
+	\draw[stateTransition] (sum) to (activate) {};
+	\draw[stateTransition] (activate) to (output){};
+	\node (dots) at (-2.3, -1.27) {$\vdots$};
+\end{tikzpicture}
+\end{preview}
+\end{document}
+

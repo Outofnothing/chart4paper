@@ -1,0 +1,28 @@
+\documentclass{article}
+\usepackage[latin1]{inputenc}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+\begin{document}
+\pagestyle{empty}
+% Define block styles
+
+\tikzstyle{body params} = [rectangle, draw, minimum height=1.2cm, fill=red!20, rounded corners]
+\tikzstyle{gait params} = [rectangle, draw, minimum height=1.2cm, fill=red!20, rounded corners]
+\tikzstyle{input node} = [rectangle, draw,minimum width=2cm, minimum height=1cm, fill=red!50, rounded corners]
+\tikzstyle{model} = [diamond, draw, fill=blue!40]
+\tikzstyle{output} = [draw, rectangle,fill=green!40, minimum width=2cm, minimum height=1cm, rounded corners]
+\tikzstyle{stateTransition}=[->, thick]    
+\begin{tikzpicture}
+    % Place nodes
+	\node [body params] (bp) at (-3,3) {Body Params (14$\times$1)};
+	\node [gait params] (gp) at (3, 3) {Gait Params (2$\times$1)};
+    	\node [input node] (input) at (0, 1) {Model Input (16$\times$1)};
+	\node [model] (generator) at (0, -2) {Gait Generator};
+	\node [output] (output) at (0, -5) {Model Output (100$\times$3)};
+    % Draw edges
+	\draw[stateTransition] (bp) to[out=0,in=90] (input);
+	\draw[stateTransition] (gp) to[out=180,in=90] (input);
+	\draw[stateTransition] (input) to (generator);
+	\draw[stateTransition] (generator) to (output) ;
+\end{tikzpicture}
+\end{document}
